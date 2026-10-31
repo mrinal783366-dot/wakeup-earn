@@ -64612,7 +64612,7 @@ A.Bu.prototype={
 qc(a){return this.Uw(a)},
 Uw(a){var s=0,r=A.O(t.H),q
 var $async$qc=A.P(function(b,c){if(b===1)return A.L(c,r)
-for(;;)switch(s){case 0:q=A.aqp().Y("downloads/wakeup-earn-v1.0.2.apk")
+for(;;)switch(s){case 0:q=A.aqp().Y("downloads/wakeup-earn-v1.0.3.apk")
 s=2
 return A.R(A.ac_(q,B.AB),$async$qc)
 case 2:if(!c&&a.e!=null)a.ai(t.Pu).f.OE(A.afC(null,null,null,null,null,B.af,null,A.aaX("Download could not start. Open "+q.k(0)+" manually.",null),null,B.zg,null,null,null,null,null,null,null,null,null,null))
@@ -64623,7 +64623,7 @@ n=A.ad8(n,new A.ti(A.apg(p,p,new A.qE("assets/images/logo.jpg",p,p)),m,l,B.ws,p)
 m=A.amV(B.yn,B.j,B.zq,new A.cP(A.ne(18),B.t),p)
 m=A.oJ(new A.BM(!0,new A.PK(this,a),p,p,p,m,B.V,p,!1,p,p,new A.HJ(B.N5,B.zU,m,p,p),p),p,1/0)
 l=t.d
-s=A.YK(A.d([new A.yC("v1.0.2",p),B.I_,new A.yC("Android \xb7 APK",p)],l),B.pz,B.dd,0)
+s=A.YK(A.d([new A.yC("v1.0.3",p),B.I_,new A.yC("Android \xb7 APK",p)],l),B.pz,B.dd,0)
 r=B.j.pv(0.72)
 q=A.ne(16)
 return new A.v1(A.OU(A.a9J(new A.F6(B.zw,new A.i1(B.wq,new A.r7(B.ap,B.bi,B.hL,B.c_,p,B.co,p,0,A.d([n,B.I3,B.N7,B.I1,B.N8,B.I6,m,B.I2,s,B.I5,A.OU(B.yD,new A.es(r,p,A.acS(B.y_),q,p,p,B.aQ),p,p,B.zu,1/0),B.I4,A.aaX("Dev. Swapnil Biswas",A.mr(p,p,B.fK.pv(0.9),p,p,p,p,p,p,p,p,12,p,p,p,p,p,!0,p,p,p,p,p,p,p,p))],l),p),p),p),p,p),B.wr,p,p,p,p),p)}}
