@@ -6,8 +6,8 @@ import 'package:url_launcher/url_launcher.dart';
 // pubspec.yaml. Bump all three when publishing a new build.
 // ---------------------------------------------------------------------------
 const String kAppName = 'WakeUp & Earn';
-const String kAppVersion = '1.0.3';
-const String kApkFile = 'downloads/wakeup-earn-v1.0.3.apk';
+const String kAppVersion = '1.0.4';
+const String kApkFile = 'downloads/wakeup-earn-v1.0.4.apk';
 const String kApkSizeLabel = 'Android · APK';
 const String kDeveloper = 'Dev. Swapnil Biswas';
 
