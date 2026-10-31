@@ -6,8 +6,8 @@ import 'package:url_launcher/url_launcher.dart';
 // pubspec.yaml. Bump all three when publishing a new build.
 // ---------------------------------------------------------------------------
 const String kAppName = 'WakeUp & Earn';
-const String kAppVersion = '1.0.1';
-const String kApkFile = 'downloads/wakeup-earn-v1.0.1.apk';
+const String kAppVersion = '1.0.2';
+const String kApkFile = 'downloads/wakeup-earn-v1.0.2.apk';
 const String kApkSizeLabel = 'Android · APK';
 const String kDeveloper = 'Dev. Swapnil Biswas';
 
@@ -43,9 +43,18 @@ class DownloadSite extends StatelessWidget {
 class DownloadPage extends StatelessWidget {
   const DownloadPage({super.key});
 
-  Future<void> _download() async {
-    // Same-origin path; the browser handles the APK download natively.
-    await launchUrl(Uri.parse(kApkFile), mode: LaunchMode.externalApplication);
+  /// `kApkFile` is a site-relative path ("downloads/…apk"). `Uri.parse` on a
+  /// relative path yields a URI with no scheme or host, which `launchUrl`
+  /// silently refuses on web — resolving against `Uri.base` first is what
+  /// makes the button work.
+  Future<void> _download(BuildContext context) async {
+    final uri = Uri.base.resolve(kApkFile);
+    final opened = await launchUrl(uri, mode: LaunchMode.externalApplication);
+    if (!opened && context.mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Download could not start. Open $uri manually.')),
+      );
+    }
   }
 
   @override
@@ -100,7 +109,7 @@ class DownloadPage extends StatelessWidget {
                   SizedBox(
                     width: double.infinity,
                     child: FilledButton.icon(
-                      onPressed: _download,
+                      onPressed: () => _download(context),
                       style: FilledButton.styleFrom(
                         backgroundColor: _coral,
                         foregroundColor: Colors.white,

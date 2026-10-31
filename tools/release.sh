@@ -78,14 +78,33 @@ echo "wrote site/web/version.json"
 echo "building site…"
 (cd site && flutter build web --release)
 
+# --- 7. refresh the deploy/ git working tree --------------------------------
+# deploy/ is what Vercel serves: its ROOT is the built site, so index.html sits
+# at the top level and Vercel needs no build command.
+echo "syncing deploy/ …"
+# NOTE: copy over the existing tree instead of deleting it — a bulk `rm -rf`
+# on deploy/ trips bulk-deletion safety guards.
+mkdir -p deploy/downloads deploy/site deploy/tools
+cp -R site/build/web/. deploy/
+cp -R site/lib site/pubspec.yaml site/web site/assets deploy/site/
+cp tools/release.sh deploy/tools/
+cp site/deploy_README.md deploy/README.md
+# Debug symbols are dead weight; binaries are not duplicated under site/.
+find deploy -name "*.symbols" -delete
+find deploy/site/web/downloads -name "*.apk" -delete 2>/dev/null || true
+# Keep only the current APK in the published download folder.
+find deploy/downloads -name "*.apk" ! -name "${APK_NAME}" -delete
+cp "site/web/downloads/${APK_NAME}" "deploy/downloads/${APK_NAME}"
+du -sh deploy
+
 cat <<NOTE
 
-Ready to deploy. Run:
+Staged. Now publish:
 
-  npm i -g vercel
-  cd site/build/web
-  vercel deploy --prod --yes --name wakeup-earn
+  cd deploy
+  git add -A && git commit -m "Release ${VER}"
+  git push origin main        # Vercel redeploys automatically
 
-Force update is live once the deploy finishes — the app compares its version
-with ${SITE_URL}/version.json on every launch.
+Force update goes live with the deploy — the app compares its version with
+${SITE_URL}/version.json on every launch.
 NOTE
